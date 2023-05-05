@@ -1,1 +1,9 @@
-<h1>HELLO!</h1>
+<ul>
+{{#each records}}
+    <li>
+        <h4>{{this.name}}</h4>
+        <p>{{this.date}}</p>
+        <p>{{this.amount}}</p>
+    </li>
+{{/each}}
+</ul>

@@ -11,8 +11,14 @@ const exphbs = require('express-handlebars')
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 
+const Record = require('./models/record')
+
 app.get('/', (req, res) => {
-    res.render('index')
+    Record.find()
+        .lean()
+        .sort({ date: 'asc' })
+        .then(records => res.render('index', { records }))
+        .catch(err => console.log(err))
 })
 
 app.listen(port, () => {
