@@ -5,7 +5,10 @@
         <h4>{{this.name}}</h4>
         <p>{{this.date}}</p>
         <p>{{this.amount}}</p>
-        <a href="/records/{{this._id}}/edit">edit</a>
+        <a href="/records/{{this._id}}/edit">修改</a>
+        <form action="/records/{{this._id}}/delete" method="POST">
+            <button type="submit">刪除</button>
+        </form>
     </li>
 {{/each}}
 </ul>

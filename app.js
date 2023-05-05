@@ -57,6 +57,15 @@ app.post('/records/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
+// 刪除
+app.post('/records/:id/delete', (req, res) => {
+    const id = req.params.id
+    Record.findById(id)
+        .then(record => record.remove())
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
+})
+
 app.listen(port, () => {
     console.log(`成功`)
 })
