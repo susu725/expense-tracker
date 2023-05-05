@@ -1,0 +1,19 @@
+<form action="/records/{{record._id}}" method="POST">
+    <div>
+        <label for="name">名稱*：</label>
+        <input type="text" placeholder="name" name="name" id="name" value="{{ record.name }}">
+    </div>
+    <div>
+        <label for="date">日期*：</label>
+        <input type="text" placeholder="date" name="date" id="date" value="{{record.date}}">
+    </div>
+    <div>
+        <label for="category">類別*：</label>
+        <input type="text" placeholder="category" name="category" id="category" value="{{record.category}}">
+    </div>
+    <div>
+        <label for="amount">金額*：</label>
+        <input type="text" placeholder="amount" name="amount" id="amount" value="{{record.amount}}">
+    </div>
+    <button type="submit">Save</button>
+</form>

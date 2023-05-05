@@ -29,10 +29,30 @@ app.get('/', (req, res) => {
 app.get('/records/new', (req, res) => {
     res.render('new')
 })
-
 app.post('/records', (req, res) => {
     const { name, amount } = req.body
     Record.create({ name, amount })
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
+})
+
+// 修改特定資料
+app.get('/records/:id/edit', (req, res) => {
+    const id = req.params.id
+    Record.findById(id)
+        .lean()
+        .then(record => res.render('edit', { record }))
+        .catch(err => console.log(err))
+})
+app.post('/records/:id', (req, res) => {
+    const id = req.params.id
+    const { name, amount } = req.body
+    Record.findById(id)
+        .then(record => {
+            record.name = name
+            record.amount = amount
+            record.save()
+        })
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
 })
