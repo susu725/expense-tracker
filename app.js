@@ -7,8 +7,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 require('./config/mongoose')
 
+const exphbs = require('express-handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
+app.set('view engine', 'hbs')
+
 app.get('/', (req, res) => {
-    res.send(`HI`)
+    res.render('index')
 })
 
 app.listen(port, () => {
