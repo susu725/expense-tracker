@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+}
+
+.information-zone{
+    width: 250px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-right: 40px;
+    /* background-color: aquamarine; */
+}
+
+.btn-zone{
+    width: 150px;
+    height: 37px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: yellow; */
+}
