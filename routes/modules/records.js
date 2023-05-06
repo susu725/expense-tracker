@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Record = require('../../models/record')
+const { formatDate } = require('../../helper/formatDate')
 
 // 新增
 router.get('/new', (req, res) => {
@@ -19,15 +20,19 @@ router.get('/:id/edit', (req, res) => {
     const id = req.params.id
     Record.findById(id)
         .lean()
-        .then(record => res.render('edit', { record }))
+        .then(record => {
+            record.date = formatDate(record.date)
+            res.render('edit', { record })
+        })
         .catch(err => console.log(err))
 })
 router.put('/:id', (req, res) => {
     const id = req.params.id
-    const { name, amount } = req.body
+    const { name, date, amount } = req.body
     Record.findById(id)
         .then(record => {
             record.name = name
+            record.date = date
             record.amount = amount
             record.save()
         })

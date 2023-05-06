@@ -1,28 +1,3 @@
-{{!-- <ul class="list-group">
-{{#each records}}
-    <li class="list-group-item">
-        <div class="d-flex flex-row justify-content-evenly">
-            <div class="d-flex justify-content-around">
-                <div>
-                    <h4>{{this.name}}</h4>
-                    <p>{{this.date}}</p>
-                </div>
-                <p>{{this.amount}}</p>
-            </div>
-            <div class="col-auto">
-                <div class="d-flex justify-content-around">
-                    <a class="btn btn-outline-dark" href="/records/{{this._id}}/edit">修改</a>
-                    <form action="/records/{{this._id}}?_method=DELETE" method="POST">
-                        <button class="btn btn-outline-dark" type="submit">刪除</button>
-                    </form>
-                </div> 
-            </div>
-        </div>
-    </li>
-{{/each}}
-</ul>
-<a class="btn btn-danger btn-lg" href="/records/new">Create</a> --}}
-
 <div class="container">
     <ul class="list-group">
     {{#each records}}
@@ -45,6 +20,6 @@
         </li>
     {{/each}}
     </ul>
-    <a class="btn btn-danger btn-lg" href="/records/new">Create</a>
+    <a class="btn btn-danger btn-lg" href="/records/new">新增支出</a>
 </div>
 
