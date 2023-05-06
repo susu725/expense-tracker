@@ -14,14 +14,23 @@ app.set('view engine', 'hbs')
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
+
 const Record = require('./models/record')
+const { formatDate } = require('./helper/formatDate')
 
 // 首頁
 app.get('/', (req, res) => {
     Record.find()
         .lean()
         .sort({ date: 'asc' })
-        .then(records => res.render('index', { records }))
+        .then(records => {
+            records.map(function (record, i) {
+                return records[i].date = formatDate(record.date)
+            })
+            res.render('index', { records })
+        })
         .catch(err => console.log(err))
 })
 
@@ -44,7 +53,7 @@ app.get('/records/:id/edit', (req, res) => {
         .then(record => res.render('edit', { record }))
         .catch(err => console.log(err))
 })
-app.post('/records/:id', (req, res) => {
+app.put('/records/:id', (req, res) => {
     const id = req.params.id
     const { name, amount } = req.body
     Record.findById(id)
@@ -58,7 +67,7 @@ app.post('/records/:id', (req, res) => {
 })
 
 // 刪除
-app.post('/records/:id/delete', (req, res) => {
+app.delete('/records/:id', (req, res) => {
     const id = req.params.id
     Record.findById(id)
         .then(record => record.remove())

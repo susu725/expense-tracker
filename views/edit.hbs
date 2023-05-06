@@ -1,4 +1,4 @@
-<form action="/records/{{record._id}}" method="POST">
+<form action="/records/{{record._id}}?_method=PUT" method="POST">
     <div>
         <label for="name">名稱*：</label>
         <input type="text" placeholder="name" name="name" id="name" value="{{ record.name }}">
