@@ -17,6 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
+const session = require('express-session')
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}))
+
 app.use(express.static('public'))
 
 const routes = require('./routes')
