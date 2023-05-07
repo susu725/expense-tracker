@@ -6,14 +6,18 @@ const { formatDate } = require('../../helper/formatDate')
 
 // 首頁
 router.get('/', (req, res) => {
+    let totalAmount = 0
     Record.find()
         .lean()
         .sort({ date: 'asc' })
         .then(records => {
-            records.map(function (record, i) {
-                return records[i].date = formatDate(record.date)
+            records.map(function (record) {
+                totalAmount += record.amount
             })
-            res.render('index', { records })
+            records.map(function (record) {
+                return record.date = formatDate(record.date)
+            })
+            res.render('index', { records, totalAmount })
         })
         .catch(err => console.log(err))
 })
