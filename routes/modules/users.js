@@ -32,4 +32,11 @@ router.post('/register', (req, res) => {
         .catch(err => console.log(err))
 })
 
+// 登出
+router.get('/logout', (req, res) => {
+    // Passport.js提供的函式，可清除session
+    req.logout()
+    res.redirect('/users/login')
+})
+
 module.exports = router
