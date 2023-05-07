@@ -24,6 +24,9 @@ app.use(session({
     saveUninitialized: true
 }))
 
+const usePassport = require('./config/passport')
+usePassport(app)
+
 app.use(express.static('public'))
 
 const routes = require('./routes')
