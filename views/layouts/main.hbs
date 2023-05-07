@@ -12,8 +12,15 @@
     <header>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="/">家庭記帳本</a>
-                <a class="btn btn-outline-dark fw-bold" href="/users/logout">Logout</a>
+                <a class="navbar-brand fw-bold" href="/">
+                    {{#if isAuthenticated}}{{user.name}}'s{{/if}}
+                    家庭記帳本
+                </a>
+                {{#if isAuthenticated}}
+                    <a class="btn btn-outline-dark fw-bold" href="/users/logout">Logout</a>
+                {{else}}
+                    <a class="btn btn-outline-dark fw-bold" href="/users/login">Login</a>
+                {{/if}}
             </div>
         </nav>
     </header>

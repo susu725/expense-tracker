@@ -29,6 +29,12 @@ usePassport(app)
 
 app.use(express.static('public'))
 
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.isAuthenticated()
+    res.locals.user = req.user
+    next()
+})
+
 const routes = require('./routes')
 app.use(routes)
 
