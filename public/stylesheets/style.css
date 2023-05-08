@@ -17,6 +17,7 @@
     justify-content:space-between;
     align-items: center;
     margin-right: 40px;
+    margin-top: 10px;
     /* background-color: aquamarine; */
 }
 
@@ -25,7 +26,6 @@
     height: 37px;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
     /* background-color: yellow; */
 }
 
