@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 
@@ -13,12 +14,15 @@ module.exports = app => {
         User.findOne({ email })
             .then(user => {
                 if (!user) {
-                    return done(null, false, { message: '用戶不存在!' })
+                    return done(null, false, { message: '此用戶不存在!' })
                 }
-                if (user.password !== password) {
-                    return done(null, false, { message: '帳號或密碼錯誤!' })
-                }
-                return done(null, user)
+                return bcrypt.compare(password, user.password).then(isMatch => {
+                    if (isMatch === false) {
+                        return done(null, false, { message: '帳號或密碼錯誤!' })
+                    }
+                    return done(null, user)
+                })
+
             })
             .catch(err => done(err, null))
     }))
