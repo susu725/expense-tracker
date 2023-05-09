@@ -8,6 +8,9 @@ router.use('/records', authenticator, records)
 const users = require('./modules/users')
 router.use('/users', users)
 
+const auth = require('./modules/auth')
+router.use('/auth', auth)
+
 const home = require('./modules/home')
 router.use('/', authenticator, home)
 
