@@ -1,0 +1,29 @@
+<h1 class="text-center">{{totalAmount}}</h1>
+<div class="mt-4">
+    {{#each records}}
+        <div class="row col-md-8 mx-auto p-2 border">
+            <div class="row col-8 align-items-center">
+                <div class="col-2">圖示</div>
+                <div class="col-8">
+                    <div>{{this.name}}</div>
+                    <div>{{this.date}}</div>
+                </div>
+                <div class="col-2">{{this.amount}}</div>
+            </div>
+            
+            <div class="row col-4 ms-1 align-items-center">
+                <div class="col-6">
+                    <a href="/restaurants/{{this.id}}/edit" class="text-decoration-none ms-1">
+                        <button type="button" class="btn btn-secondary">Edit</button>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <form action="/restaurants/{{this.id}}?_method=DELETE" method="POST" class="ms-1">
+                        <button type="sumbit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+<a class="col-2 btn btn-success m-4" href="/restaurants/create">新增支出</a>
