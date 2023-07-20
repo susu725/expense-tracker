@@ -30,7 +30,7 @@ const records = [
     {
         name: '租金',
         date: '2015/04/01',
-        amount: 60
+        amount: 25000
     }
 ]
 
