@@ -2,9 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 const Record = require('../../models/record')
-const Category = require('../../models/category')
 
-const { formatDate } = require('../../helper/formatDate')
+const { formatHomeDate } = require('../../helper/formatDate')
 
 router.get('/', (req, res) => {
     let totalAmount = 0
@@ -14,7 +13,7 @@ router.get('/', (req, res) => {
         .sort({ date: 'desc' })
         .then(records => {
             records.map(record => {
-                record.date = formatDate(record.date)
+                record.date = formatHomeDate(record.date)
                 totalAmount += record.amount
                 record.categoryId = record.categoryId.image
             })

@@ -15,12 +15,12 @@
             
             <div class="row col-4 ms-1 align-items-center">
                 <div class="col-6">
-                    <a href="/records/{{this.id}}/edit" class="text-decoration-none ms-1">
+                    <a href="/records/{{this._id}}/edit" class="text-decoration-none ms-1">
                         <button type="button" class="btn btn-secondary">Edit</button>
                     </a>
                 </div>
                 <div class="col-6">
-                    <form action="/records/{{this.id}}?_method=DELETE" method="POST" class="ms-1">
+                    <form action="/records/{{this._id}}?_method=DELETE" method="POST" class="ms-1">
                         <button type="sumbit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>
