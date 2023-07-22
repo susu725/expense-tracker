@@ -10,27 +10,27 @@ const categories = [
     {
         id: 1,
         name: '家居物業',
-        image: 'https://fontawesome.com/icons/home?style=solid'
+        image: 'fa-solid fa-house'
     },
     {
         id: 2,
         name: '交通出行',
-        image: 'https://fontawesome.com/icons/shuttle-van?style=solid'
+        image: 'fa-solid fa-van-shuttle'
     },
     {
         id: 3,
         name: '休閒娛樂',
-        image: 'https://fontawesome.com/icons/grin-beam?style=solid'
+        image: 'fa-solid fa-face-grin-beam'
     },
     {
         id: 4,
         name: '餐飲食品',
-        image: 'https://fontawesome.com/icons/utensils?style=solid'
+        image: 'fa-solid fa-utensils'
     },
     {
         id: 5,
         name: '其他',
-        image: 'https://fontawesome.com/icons/pen?style=solid'
+        image: 'fa-solid fa-pen'
     }
 ]
 
