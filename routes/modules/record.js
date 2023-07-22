@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
     const { name, date, category, amount } = req.body
     return Category.findOne({ id: category }).then(categoryId => {
         Record.create({ name, date, categoryId, amount })
-        res.redirect('/')
+            .then(() => res.redirect('/'))
     })
         .catch(err => console.log(err))
 })
