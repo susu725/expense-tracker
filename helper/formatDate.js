@@ -8,11 +8,8 @@ module.exports = {
     },
     formatEditDate: (date) => {
         let year = date.getFullYear()
-        let month = date.getMonth() + 1
-        if (month < 10) {
-            month = `0${month}`
-        }
-        let day = date.getDate()
+        let month = String(date.getMonth() + 1).padStart(2, '0')
+        let day = String(date.getDate()).padStart(2, '0')
         let objectDate = `${year}-${month}-${day}`
         return objectDate
     }

@@ -43,11 +43,17 @@ router.put('/:id', (req, res) => {
     Category.findOne({ id: info.category }).then(categoryId => {
         info.categoryId = categoryId
         return Record.updateOne({ _id }, info)
-            .then(() => {
-                res.redirect('/')
-                console.log(info)
-            })
     })
+        .then(() => { res.redirect('/') })
+        .catch(err => console.log(err))
+})
+
+// 刪除
+router.delete('/:id', (req, res) => {
+    const _id = req.params.id
+    return Record.findOne({ _id })
+        .then(record => record.remove())
+        .then(() => res.redirect('/'))
         .catch(err => console.log(err))
 })
 
