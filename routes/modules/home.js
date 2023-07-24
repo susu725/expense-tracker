@@ -6,8 +6,9 @@ const Record = require('../../models/record')
 const { formatHomeDate } = require('../../helper/formatDate')
 
 router.get('/', (req, res) => {
+    const userId = req.user._id
     let totalAmount = 0
-    return Record.find()
+    return Record.find({ userId })
         .populate({ path: 'categoryId', select: 'image' })
         .lean()
         .sort({ date: 'desc' })

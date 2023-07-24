@@ -12,9 +12,10 @@ router.get('/create', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    const userId = req.user._id
     const { name, date, category, amount } = req.body
     return Category.findOne({ id: category }).then(categoryId => {
-        Record.create({ name, date, categoryId, amount })
+        Record.create({ name, date, categoryId, amount, userId })
             .then(() => res.redirect('/'))
     })
         .catch(err => console.log(err))
@@ -22,9 +23,10 @@ router.post('/', (req, res) => {
 
 // 編輯
 router.get('/:id/edit', (req, res) => {
+    const userId = req.user._id
     const _id = req.params.id
     let categoryName = ''
-    return Record.findOne({ _id })
+    return Record.findOne({ _id, userId })
         .populate({ path: 'categoryId', select: ['id', 'name'] })
         .lean()
         .then(record => {
@@ -38,11 +40,12 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+    const userId = req.user._id
     const _id = req.params.id
     const info = req.body
     Category.findOne({ id: info.category }).then(categoryId => {
         info.categoryId = categoryId
-        return Record.updateOne({ _id }, info)
+        return Record.updateOne({ _id, userId }, info)
     })
         .then(() => { res.redirect('/') })
         .catch(err => console.log(err))
@@ -50,8 +53,9 @@ router.put('/:id', (req, res) => {
 
 // 刪除
 router.delete('/:id', (req, res) => {
+    const userId = req.user._id
     const _id = req.params.id
-    return Record.findOne({ _id })
+    return Record.findOne({ _id, userId })
         .then(record => record.remove())
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
