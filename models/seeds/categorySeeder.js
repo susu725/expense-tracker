@@ -35,7 +35,7 @@ const categories = [
 ]
 
 db.once('open', () => {
-    categories.map(category => {
-        Category.create({ ...category })
-    })
+    Category.create(categories)
+        .then(() => process.exit())
+        .catch(err => console.log(err))
 })
