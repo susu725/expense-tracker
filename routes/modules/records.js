@@ -4,7 +4,7 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 
-const { formatEditDate } = require('../../helper/formatDate')
+const { formatHomeDate, formatEditDate } = require('../../helper/formatDate')
 
 // 新增
 router.get('/create', (req, res) => {
@@ -59,6 +59,37 @@ router.delete('/:id', (req, res) => {
         .then(record => record.remove())
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
+})
+
+// 搜尋
+router.get('/search', (req, res) => {
+    const userId = req.user._id
+    const { category } = req.query
+    let isSearch = false
+    let categoryName = ''
+    let totalAmount = 0
+    return Category.findOne({ id: category }).then(categoryObj => {
+        if (category !== 0) {
+            isSearch = true
+            categoryName = categoryObj.name
+        }
+        return Record.find({ userId, categoryId: categoryObj._id })
+            .populate({ path: 'categoryId', select: ['name', 'image'] })
+            .lean()
+            .sort({ date: 'desc' })
+            .then(records => {
+
+                records.map(record => {
+                    record.date = formatHomeDate(record.date)
+                    totalAmount += record.amount
+                    record.categoryId = record.categoryId.image
+                })
+                res.render('index', { records, totalAmount, isSearch, categoryName })
+            })
+    })
+
+        .catch(err => console.log(err))
+
 })
 
 module.exports = router
